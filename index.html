@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "icon" href = "logo.png" type = "image/x-icon">
+    <link rel="stylesheet" href="style2.css">
+    <title>Voting Page</title>
+</head>
+<body>
+  <div class="box" id="top">
+      <h1>Medi-Caps International School</h1>
+  </div>
+  <center>
+    <h1>Election 2023-2024</h1>     
+  </center>
+  <form id="login-form" name="login-form">
+    <b>
+        <label id="lb1">Username:</label>
+    </b>
+  <input type="text" name="username" placeholder="Scholar No" required><br>
+  <br><br>
+    <div id="votingContainer">
+      <div id="optionsContainer">
+    <div class="box-wrapper">
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<div class="box" id="box1">
+        <h3 class="heading-wrapper">
+          <span class="text1">Head-Boy</span>
+        </h3>
+        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="head-boy" value="Option 1">
+        <label><img src="logo.png"> Option 1</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="head-boy" value="Option 2"><label><img src="logo.png"> Option 2</label><br>
+        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="head-boy" value="Option 3"><label><img src="logo.png"> Option 3</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <input type="radio" name="head-boy" value="Option 4"><label><img src="logo.png"> Option 4</label><br>
+        &nbsp&nbsp&nbsp&nbsp <input type="radio" name="head-boy" value="Option 5"><label><img src="logo.png"> Option 5</label><br>
+      </div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      <div class="box" id="box2">
+        <h3 class="heading-wrapper">
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span class="text2">Head-Girl</span>
+        </h3>
+        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="head-girl" value="Option 6"><label><img src="logo.png"> Option 1</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <input type="radio" name="head-girl" value="Option 7"><label><img src="logo.png"> Option 2</label><br>
+        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="head-girl" value="Option 8"><label><img src="logo.png"> Option 3</label>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <input type="radio" name="head-girl" value="Option 9"><label><img src="logo.png"> Option 4</label><br>
+        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="head-girl" value="Option 10"><label><img src="logo.png"> Option 5</label><br>
+      </div><br>
+      <center><br>
+        <button type="submit" onclick="submitVote()">Submit</button>
+      </div>
+    </div>
+  </form>
+      </center>
+    </div>
+    <div class="box" id="btm1">
+      <center>
+        <h1>Developed by Vinesh Katara of X-C</h1>
+      </center>
+    </div>
+    <script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbwmnn8in4XH8gIjV2lP2mIjjVo2uT49IHpMXzz0lS1zjXt3azsziqO3iAiKtSX-7pS6oA/exec"
+        const form = document.forms['login-form']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => alert('Success!', response))
+            .catch(error => alert('Error!', error.message))
+        })
+        function submitVote() {
+  const selectedOptionBoy = document.querySelector('input[name="head-boy"]:checked');
+  const selectedOptionGirl = document.querySelector('input[name="head-girl"]:checked');
+
+  if (selectedOptionBoy && selectedOptionGirl) {
+    const selectedValueBoy = selectedOptionBoy.value;
+    const selectedValueGirl = selectedOptionGirl.value;
+    vote(selectedValueBoy);
+    vote(selectedValueGirl);
+    window.location.href = 'thank.html';
+  } else {
+    alert('Please select an option for both Head Boy and Head Girl.');
+  }
+}
+
+function vote(option) {
+  // Get the existing vote data from localStorage or initialize it
+  let voteData = JSON.parse(localStorage.getItem('voteData')) || {
+    'Option 1': 0,
+    'Option 2': 0,
+    'Option 3': 0,
+    'Option 4': 0,
+    'Option 5': 0,
+    'Option 6': 0,
+    'Option 7': 0,
+    'Option 8': 0,
+    'Option 9': 0,
+    'Option 10': 0,
+  };
+
+  // Increment the vote count for the selected option
+  voteData[option]++;
+
+  // Store the updated vote data in localStorage
+  localStorage.setItem('voteData', JSON.stringify(voteData));
+}
+
+// Get the vote data from localStorage
+let voteData = JSON.parse(localStorage.getItem('voteData'));
+
+// Display the vote results on the dashboard
+document.getElementById('result1').textContent = `Option 1: ${voteData['Option 1']} votes`;
+document.getElementById('result2').textContent = `Option 2: ${voteData['Option 2']} votes`;
+document.getElementById('result3').textContent = `Option 3: ${voteData['Option 3']} votes`;
+document.getElementById('result4').textContent = `Option 4: ${voteData['Option 4']} votes`;
+document.getElementById('result5').textContent = `Option 5: ${voteData['Option 5']} votes`;
+document.getElementById('result6').textContent = `Option 6: ${voteData['Option 6']} votes`;
+document.getElementById('result7').textContent = `Option 7: ${voteData['Option 7']} votes`;
+document.getElementById('result8').textContent = `Option 8: ${voteData['Option 8']} votes`;
+document.getElementById('result9').textContent = `Option 9: ${voteData['Option 9']} votes`;
+document.getElementById('result10').textContent = `Option 10: ${voteData['Option 10']} votes`;
+    </script>
+    
+</body>
+</html>

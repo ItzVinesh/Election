@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="5">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "icon" href = "logo.png" type = "image/x-icon">
+    <title>Result Page</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+  <div class="box" id="top3">
+    <h1>Medi-Caps International School</h1>
+  </div>
+  <center>
+    <h1>Election 2023-2024</h1>
+    <div class="box">
+      <h2 id="h23">Head-boy</h2>
+      <div id="resultsContainer">
+        <div id="result1" class="resultItem"></div>
+        <div id="result2" class="resultItem"></div>
+        <div id="result3" class="resultItem"></div>
+        <div id="result4" class="resultItem"></div>
+        <div id="result5" class="resultItem"></div>
+      </div>
+    </div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <div class="box">
+      <h2 id="h23">Head-girl</h2>
+      <div id="resultsContainer">
+        <div id="result6" class="resultItem"></div>
+        <div id="result7" class="resultItem"></div>
+        <div id="result8" class="resultItem"></div>
+        <div id="result9" class="resultItem"></div>
+        <div id="result10" class="resultItem"></div>
+      </div>
+    </div>
+    </center>
+    <br><br>
+      <div class="box" id="btm3">
+        <center>
+          <h1>Developed by Vinesh Katara</h1>
+        </center>
+      </div>
+      <script>
+        function submitVote() {
+  const selectedOption = document.querySelector('input[name="headGirl"]:checked');
+  if (selectedOption) {
+    const selectedValue = selectedOption.value;
+    vote(selectedValue);
+    document.getElementById('optionsContainer').innerHTML = `
+      <p>Thank you for voting!</p>
+    `;
+  } else {
+    alert('Please select an option.');
+  }
+}
+
+function vote(option) {
+  // Get the existing vote data from localStorage or initialize it
+  let voteData = JSON.parse(localStorage.getItem('voteData')) || {
+    'Option 1': 0,
+    'Option 2': 0,
+    'Option 3': 0,
+    'Option 4': 0,
+    'Option 5': 0,
+    'Option 6': 0,
+    'Option 7': 0,
+    'Option 8': 0,
+    'Option 9': 0,
+    'Option 10': 0,
+  };
+
+  // Increment the vote count for the selected option
+  voteData[option]++;
+
+  // Store the updated vote data in localStorage
+  localStorage.setItem('voteData', JSON.stringify(voteData));
+}
+
+// Get the vote data from localStorage
+let voteData = JSON.parse(localStorage.getItem('voteData'));
+
+// Display the vote results on the dashboard
+document.getElementById('result1').textContent = `Option 1: ${voteData['Option 1']} votes`;
+document.getElementById('result2').textContent = `Option 2: ${voteData['Option 2']} votes`;
+document.getElementById('result3').textContent = `Option 3: ${voteData['Option 3']} votes`;
+document.getElementById('result4').textContent = `Option 4: ${voteData['Option 4']} votes`;
+document.getElementById('result5').textContent = `Option 5: ${voteData['Option 5']} votes`;
+document.getElementById('result6').textContent = `Option 6: ${voteData['Option 6']} votes`;
+document.getElementById('result7').textContent = `Option 7: ${voteData['Option 7']} votes`;
+document.getElementById('result8').textContent = `Option 8: ${voteData['Option 8']} votes`;
+document.getElementById('result9').textContent = `Option 9: ${voteData['Option 9']} votes`;
+document.getElementById('result10').textContent = `Option 10: ${voteData['Option 10']} votes`;
+      
+setTimeout(function() {
+  location.reload();
+}, 3000);
+
+      </script>
+</body>
+</html>

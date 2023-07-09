@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "icon" href = "logo.png" type = "image/x-icon">
+    <link rel="stylesheet" href="style2.css">
+  <title>Login Page</title>
+</head>
+<body>
+  <div class="box" id="top2">
+    <center>
+      <h1>Medi-Caps International School</h1>
+    </center>
+  </div><br><br>
+  <center>
+  <h1>Election 2023-2024</h1>
+  <h1>Login Page</h1><br>
+    <form id="login-form">
+      <div class="box" id="bx2"><br><br><br><br><br>
+        <label>Username:</label>
+      <input type="text" id="username" name="username" placeholder="Enter you Scholar-ID" required><br><br>
+      <label>Password:</label>
+      <input type="password" name="password" placeholder="Enter your DOB" required><br>
+      <button type="submit">Login</button>
+      </div>
+    </form>
+  </center>
+  <div class="box" id="btm2">
+    <center>
+      <h1>Developed by Vinesh Katara X-C</h1>
+    </center>
+   </div> 
+  <script>
+ // Check if the user is already logged in
+
+  // Add event listener for form submission
+  document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Get the entered username and password
+    var username = document.getElementById('username').value;
+    var password = document.getElementsByName('password')[0].value;
+
+    // Check if the user is already logged in
+    if (localStorage.getItem('isLoggedIn')) {
+      alert('Already logged in!');
+    } else {
+      // Perform login validation here
+      if (username === '1774' && password === '28122007') {
+        // Successful login
+        localStorage.setItem('isLoggedIn', true);
+        redirectToAnotherPage();
+      } else {
+        // Invalid login
+        alert('Wrong username or password');
+      }
+    }
+  });
+
+  // Redirect to another page
+  function redirectToAnotherPage() {
+    window.location.href = 'index.html';
+  }
+  
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzLLTLZ7QUBjRA943-04Fcu8wOHk73-jHuAyeMgOKcHaEjS3yJRdTeUQn-LUUKPs86goA/exec'
+        const form = document.forms['login-form']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => alert('Success!', response))
+            .catch(error => alert('Error!', error.message))
+        })
+  </script>
+</body>
+</html>
